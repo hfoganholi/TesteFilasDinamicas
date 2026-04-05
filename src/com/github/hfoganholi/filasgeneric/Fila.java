@@ -22,7 +22,7 @@ public class Fila {
 		No elemento = new No();
 		elemento.dado = valor;
 		elemento.proximo = null;
-		if (inicio == null) { //verifica se é o primeiro elemento
+/*		if (inicio == null) { //verifica se é o primeiro elemento
 			inicio = elemento;
 			fim = elemento;
 			elemento.proximo = null;
@@ -35,7 +35,16 @@ public class Fila {
 				elemento.proximo = null;
 				fim = elemento;
 			}
-		}
+		}*/
+		if (isEmpty()) {
+	        inicio = elemento;
+	        fim = elemento;
+	    } else {
+	        // ESSA LINHA É A COLA: liga o último atual ao novo elemento
+	        fim.proximo = elemento; 
+	        // O novo elemento agora passa a ser o novo último
+	        fim = elemento;
+	    }
 	}
 	
 	public int remove() throws Exception {
@@ -52,14 +61,17 @@ public class Fila {
 		return auxiliar.dado;
 	}
 	
-	public void list() throws Exception {
+	public String list() throws Exception {
 		if (isEmpty()) {
 			throw new Exception("Fila Vazia");
 		}
+		String elementos = ""; //começa vazio
 		No auxiliar = inicio;
 		while (auxiliar != null) {
+			elementos += auxiliar.dado + ", ";
 			auxiliar = auxiliar.proximo;
 		}
+		return elementos;
 	}
 	
 	public int size() {
