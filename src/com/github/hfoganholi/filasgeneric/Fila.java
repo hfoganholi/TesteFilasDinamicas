@@ -1,9 +1,9 @@
 package com.github.hfoganholi.filasgeneric;
 
-public class Fila {
+public class Fila<T> {
 
-	No inicio;
-	No fim;
+	private No<T> inicio;
+	private No<T> fim;
 	
 	public Fila() {
 		inicio = null;
@@ -18,8 +18,8 @@ public class Fila {
 		}
 	}
 	
-	public void insert (int valor) {
-		No elemento = new No();
+	public void insert (T valor) {
+		No<T> elemento = new No<>();
 		elemento.dado = valor;
 		elemento.proximo = null;
 /*		if (inicio == null) { //verifica se é o primeiro elemento
@@ -47,11 +47,11 @@ public class Fila {
 	    }
 	}
 	
-	public int remove() throws Exception {
+	public T remove() throws Exception {
 		if (isEmpty()) {
 			throw new Exception ("Fila Vazia");
 		}
-		No auxiliar = inicio;
+		No<T> auxiliar = inicio;
 		if (inicio == fim && inicio != null) {
 			inicio = null;
 			fim = null;
@@ -65,19 +65,19 @@ public class Fila {
 		if (isEmpty()) {
 			throw new Exception("Fila Vazia");
 		}
-		String elementos = ""; //começa vazio
-		No auxiliar = inicio;
+		StringBuilder elementos = new StringBuilder();
+		No<T> auxiliar = inicio;
 		while (auxiliar != null) {
-			elementos += auxiliar.dado + ", ";
+			elementos.append(auxiliar.dado).append(", ");
 			auxiliar = auxiliar.proximo;
 		}
-		return elementos;
+		return elementos.toString();
 	}
 	
 	public int size() {
 		int cont = 0;
 		if (!isEmpty()) {
-			No auxiliar = inicio;
+			No<T> auxiliar = inicio;
 			while (auxiliar != null) {
 				cont++;
 				auxiliar = auxiliar.proximo;

@@ -33,7 +33,7 @@ package com.github.hfoganholi.filasgeneric;
 public class Principal {
 
 	public static void main(String[] args) {
-		Fila f = new Fila();
+		Fila<Integer> f = new Fila<>();
 		
 		System.out.println("=== INICIANDO TESTES DA FILA ===\n");
 
