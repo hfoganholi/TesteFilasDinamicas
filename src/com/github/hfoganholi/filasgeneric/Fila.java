@@ -22,28 +22,24 @@ public class Fila<T> {
 		No<T> elemento = new No<>();
 		elemento.dado = valor;
 		elemento.proximo = null;
-/*		if (inicio == null) { //verifica se é o primeiro elemento
-			inicio = elemento;
-			fim = elemento;
-			elemento.proximo = null;
-		} else {
-			if (inicio == fim && inicio != null) { //verifica se é o segundo elemento
-				fim = elemento;
-				fim.proximo = null;
-			} else {
-				fim.proximo = elemento;
-				elemento.proximo = null;
-				fim = elemento;
-			}
-		}*/
+
 		if (isEmpty()) {
 	        inicio = elemento;
 	        fim = elemento;
+	        elemento.proximo = null;
 	    } else {
-	        // ESSA LINHA É A COLA: liga o último atual ao novo elemento
-	        fim.proximo = elemento; 
-	        // O novo elemento agora passa a ser o novo último
-	        fim = elemento;
+	    	if (inicio == fim && inicio != null) { 
+				fim = elemento;
+				inicio.proximo = fim;
+				fim.proximo = null;
+	    	} else {
+	    		
+		        fim.proximo = elemento; 
+		        elemento.proximo = null;
+		        
+		        fim = elemento;
+	    	}
+	    	
 	    }
 	}
 	
@@ -61,17 +57,15 @@ public class Fila<T> {
 		return auxiliar.dado;
 	}
 	
-	public String list() throws Exception {
+	public void list() throws Exception {
 		if (isEmpty()) {
 			throw new Exception("Fila Vazia");
 		}
-		StringBuilder elementos = new StringBuilder();
 		No<T> auxiliar = inicio;
 		while (auxiliar != null) {
-			elementos.append(auxiliar.dado).append(", ");
+			System.out.println(auxiliar.dado);
 			auxiliar = auxiliar.proximo;
 		}
-		return elementos.toString();
 	}
 	
 	public int size() {
